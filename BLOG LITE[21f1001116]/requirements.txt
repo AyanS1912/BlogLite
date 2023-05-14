@@ -1,0 +1,5 @@
+flask
+Flask-SQLAlchemy
+flask_login
+Jinja
+flask_restful

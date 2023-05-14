@@ -1,0 +1,40 @@
+{% extends 'dashbase.html' %}
+{% block title %}Create Post{% endblock %}
+
+{% block content %}
+
+
+
+<div class=" container bg-dark" ">
+  <h1 text-align:center>  <font color="white">Create A New Post</font></h1>
+  <form method="POST" action='/post/create' enctype="multipart/form-data" >
+    <div class="form-floating mb-3 ">
+      <input type="text" class="form-control" id="title" name="title" placeholder="Title" required>
+      <label for="Title">Title</label>
+    </div>
+    <br/>
+	  
+    <div class="desc">
+      <textarea rows="5" cols="10 " class="form-control" id="desc" name="desc" placeholder="Description"
+        required></textarea>
+
+    </div>
+    <br />
+    <label for="img">Post</label>
+    <div class="form-floating mb-3">
+      <input type="file" class="form-control" id="img" name="img" placeholder="Post" required>
+    </div>
+
+    <br />
+    <input class="btn btn-primary" type="submit" value="Upload">
+
+
+  </form>
+
+
+</div>
+
+
+
+
+{% endblock %}

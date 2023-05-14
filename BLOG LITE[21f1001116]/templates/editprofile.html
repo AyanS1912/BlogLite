@@ -1,0 +1,57 @@
+{% extends 'dashbase.html' %}
+{% block title %}Update Profile{% endblock %}
+
+{% block content %}
+
+<div>
+  <div class="row justify-content-center">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    {% if category =='success' %}
+    <div class="alert alert-dark alert-dismissible fade show" role="alert" border>
+      <strong>{{ message }}</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% else %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong>{{ message }}</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+  </div>
+</div>
+
+<div class= "container shadow p-5 mb-5 bg-body rounded " id="update_profile">
+  <h1 text-align:center>Update My profile</h1>
+  <form method="POST" action='/profile/update/{{current_user.id}}' enctype="multipart/form-data">
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="name" name="name" placeholder="Name" required >
+      <label for="name">Name</label>
+    </div>
+    <br/>
+	  
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="username" name="username" placeholder="username" required >
+      <label for="username">Username</label>
+    </div>
+    <br/>
+    <br/>
+    
+    <label for="profile_pic">Profile Image</label>
+    <div class="form-floating mb-3">
+      <input type="file" class="form-control" id="profile_pic" name="profile_pic" placeholder="Profile Image" >
+    </div>
+
+    <br />
+    <input class="btn btn-primary" type="submit" value="Update">
+
+  </form>
+</div>
+
+
+
+{% endblock %}

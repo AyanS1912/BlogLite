@@ -1,0 +1,174 @@
+{% extends 'dashbase.html' %}
+  {% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="container text-center">
+  <div class="row ">
+    <div class="col">
+      <div class="card bg-dark" style="width: 15rem">
+        <h5 class="card-header"><img src="/profile/get_image/{{users.id}}" class="rounded-circle me-2" width="200" height="200"
+            alt="profile_pic"><br><font color="white">{{users.username }}</font></br>
+        </h5>
+        <div class="card-body">
+          <h5 class="card-title"><font color="white">{{users.name}}</font></h5>
+          <div class="d-flex justify-content-between">
+            {% if current_user.is_following(users) %}
+                <form method="POST" action="/unfollow/{{users.id}}">
+                    <button type="submit" class="btn btn-primary">Unfollow</button>
+                </form>
+            {% else %}
+                <form method="POST" action="/follow/{{users.id}}">
+                    <button type="submit" class="btn btn-primary">Follow</button>
+                </form>
+            {% endif %}
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card bg-dark" style="width: 8rem; border:none">
+        <div class="card-body">
+            <h5 class="card-title"><strong><font color="white">Post</font></strong></h5>
+            <p class="card-text"><h4><font color="white">{{users.post|length}}</font></h4></p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card bg-dark" style="width:8rem; border:none">
+        <div class="card-body">
+            <h5 class="card-title"><strong><font color="white">Follower</font></strong></h5>
+            <p class="card-text"><h4><font color="white">{{follower|length}}</font></h4></p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card bg-dark" style="width: 8rem; border:none">
+        <div class="card-body">
+            <h5 class="card-title"><strong><font color="white">Following</font></strong></h5>
+            <p class="card-text"><h4><font color="white">{{following|length}}</font></h4></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<span class="d-block p-1 text-bg-dark"></span>
+<br>
+
+
+
+
+{% for post in posts|reverse %}
+  {% if users.is_following(post.user) or users.id==post.uid %}
+    <br>
+<div class="row justify-content-center">
+  <div class="card  text-muted shadow bg-dark" style="width: 60rem;">
+    <ul class="list-group list-group-flush ">
+      <li class="list-group-item d-flex bg-dark ">
+        <div class="d-flex sm-3 align-items-start">
+          <div class="p-1 align-items-start">
+            <a<img class="rounded-circle me-2" width="40" height="40"
+                                src="/profile/get_image/{{current_user.id}}" alt="mypost-{{current_user.id}}}">
+            <h5><font color ="white">{{post.user.username}}</font></h5>
+          </div>
+          
+          <div class="ms-auto p-2 d-flex align-items-end">
+            
+            <button class="btn btn-primary dropdown-toggle " type="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+    
+            </button>
+            <ul class="dropdown-menu dropdown-menu-light">
+              {% if users.id == post.uid %}
+              <li><a class="dropdown-item active" href="/post/update/{{post.id}}">Edit</a></li>
+              <li><a class="dropdown-item" href="/post/delete/{{post.id}}">Delete</a></li>
+              {% endif %}
+              <li><a class="dropdown-item" href="/home/my_profile/{{post.user.username}}">Visit Profile</a></li>
+            </ul>
+            
+          </div>
+        </div>
+
+
+
+      </li>
+
+    </ul>
+    <img src="/post/get_image/{{post.id}}" class="card-img-top img " width="200" height="300" alt="mypost-{{post.id}}">
+    <div class="card-body ">
+      <h5 class="card-title"><strong><b><font color ="white">Title:{{post.title}}</font></b></strong></h5>
+      <p class="card-text"><font color ="white">Content:{{post.desc}}</font></p>
+    </div>
+
+
+    <div class="card-body"><span><font color ="white">Date:{{post.post_date}}</font></span>
+
+      <div class="card-footer text-muted">
+        <div class='row'>
+          <div class='col-4'>
+            <small><font color ="white">{{post.likes|length}} Like</font></small>
+            {% if current_user.id in post.likes|map(attribute="uid")|list %}
+            <a href="/post/like/{{post.id}}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-balloon-heart-fill" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M8.49 10.92C19.412 3.382 11.28-2.387 8 .986 4.719-2.387-3.413 3.382 7.51 10.92l-.234.468a.25.25 0 1 0 .448.224l.04-.08c.009.17.024.315.051.45.068.344.208.622.448 1.102l.013.028c.212.422.182.85.05 1.246-.135.402-.366.751-.534 1.003a.25.25 0 0 0 .416.278l.004-.007c.166-.248.431-.646.588-1.115.16-.479.212-1.051-.076-1.629-.258-.515-.365-.732-.419-1.004a2.376 2.376 0 0 1-.037-.289l.008.017a.25.25 0 1 0 .448-.224l-.235-.468ZM6.726 1.269c-1.167-.61-2.8-.142-3.454 1.135-.237.463-.36 1.08-.202 1.85.055.27.467.197.527-.071.285-1.256 1.177-2.462 2.989-2.528.234-.008.348-.278.14-.386Z"/>
+</svg></a>
+            {% else %}
+              <a href="/post/like/{{post.id}}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-balloon-heart" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="m8 2.42-.717-.737c-1.13-1.161-3.243-.777-4.01.72-.35.685-.451 1.707.236 3.062C4.16 6.753 5.52 8.32 8 10.042c2.479-1.723 3.839-3.29 4.491-4.577.687-1.355.587-2.377.236-3.061-.767-1.498-2.88-1.882-4.01-.721L8 2.42Zm-.49 8.5c-10.78-7.44-3-13.155.359-10.063.045.041.089.084.132.129.043-.045.087-.088.132-.129 3.36-3.092 11.137 2.624.357 10.063l.235.468a.25.25 0 1 1-.448.224l-.008-.017c.008.11.02.202.037.29.054.27.161.488.419 1.003.288.578.235 1.15.076 1.629-.157.469-.422.867-.588 1.115l-.004.007a.25.25 0 1 1-.416-.278c.168-.252.4-.6.533-1.003.133-.396.163-.824-.049-1.246l-.013-.028c-.24-.48-.38-.758-.448-1.102a3.177 3.177 0 0 1-.052-.45l-.04.08a.25.25 0 1 1-.447-.224l.235-.468ZM6.013 2.06c-.649-.18-1.483.083-1.85.798-.131.258-.245.689-.08 1.335.063.244.414.198.487-.043.21-.697.627-1.447 1.359-1.692.217-.073.304-.337.084-.398Z"/>
+</svg></a>
+            {% endif %}
+          </div>
+          
+          <div class='col-8'> 
+            <small> <font color ="white">{{post.comments|length}} Comments</font></small> 
+            <a data-bs-toggle="collapse" href="#{{post.id}}/comment" class="link" role="button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                fill="white" s class="bi bi-chat-dots-fill" viewBox="0 0 16 16">
+                <path
+                  d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+              </svg>
+            </a></div>
+        </div>
+      </div>
+      <br/>
+      <form class= " form-floating mb-3" method="POST" action="/post/comment/{{post.id}}">
+        <input type="text" class="form-control" id="comment" name="comment" placeholder="Comment">
+        <label for="comment">Comment</label>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      <br/>
+      <div class ='collapse' id='{{post.id}}/comment'>
+        <div class="card">
+  
+  <div class="card-header">
+    Comments
+  </div>
+  <div class="card-body">
+    <p class="card-text">
+      {% for comment  in post.comments %}
+        <div class="d-flex align-items-center justify-content-between">
+          <p>{{comment.user.username}} : {{comment.comment}} </p>
+          
+          {% if current_user.id == comment.user.id %}
+          <small><h6>Date:{{comment.comment_date}}</h6></small>
+          <a href="/comment/delete/{{comment.comm_id}}" class="btn btn-primary">Delete</a>
+          
+          {% else %}
+          <small><h6>Date:{{comment.comment_date}}</h6></small>
+          {% endif %}
+        
+        </div>
+      {% endfor %}
+    </p>
+  </div>
+</div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+  {% endif %}
+{% endfor %}
+          
+
+{% endblock %}

@@ -1,0 +1,1 @@
+9999999999{"name": "aniso8601", "version": "9.0.1", "summary": "A library for parsing ISO 8601 strings.", "platform": "", "requires_dist": ["black ; extra == 'dev'", "coverage ; extra == 'dev'", "isort ; extra == 'dev'", "pre-commit ; extra == 'dev'", "pyenchant ; extra == 'dev'", "pylint ; extra == 'dev'"], "requires_python": "", "files": [], "_cache_version": "1.0.0"}

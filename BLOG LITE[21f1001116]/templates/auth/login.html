@@ -1,0 +1,36 @@
+{% extends '/auth/base_1.html' %}
+{% block title %}Log In{% endblock %}
+
+{% block form %}
+<div class="container" style="margin-top:5%; ">
+    <div>
+        <h1 style="text-align: center;"> Log in to your account</h1>
+        <hr>
+        <form action='/login/success' method="POST">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control " id="username" name="username" placeholder="Enter Your Username"
+                    required oninvalid="this.setCustomValidity('Please enter your Username.')">
+                <label for="username">Username</label>
+            </div>
+
+            <div class="form-floating">
+                <input type="password" class="form-control" id="password" name="password" placeholder="password"
+                    required oninvalid="this.setCustomValidity('Please enter your password.')">
+                <label for="password">Password</label>
+            </div>
+
+            <input class="btn btn-primary d-block btn-user w-100" type="submit" value="Log in">
+            <br />
+            <div class="text-center">
+                <a class="btn btn-primary d-block btn-user w-100" href="{{url_for('register')}}" role="button">Register
+                    with us</a>
+                <a class="small" href="{{url_for('register')}}"">New to Blog<sub>lite</sub>?</a>
+            </div>
+        </form>
+    </div>
+</div>
+      
+
+ 
+
+{% endblock %}

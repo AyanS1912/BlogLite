@@ -1,0 +1,1 @@
+9999999999{"name": "Jinja", "version": "1.2", "summary": "A small but fast and easy to use stand-alone template engine written in pure python.", "platform": "UNKNOWN", "requires_dist": ["setuptools>=0.6a2 ; extra == \"plugin\""], "requires_python": null, "files": [], "_cache_version": "1.0.0"}

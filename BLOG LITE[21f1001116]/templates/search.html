@@ -1,0 +1,63 @@
+{% extends 'dashbase.html' %}
+{% block title %}Search{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid" id="search_for">
+  <br
+  <h2 style="text-align">You Searched For: {{ search }} </h2>
+  <div class="card shadow" >
+    <div class="card-header py-3">
+        <p class="text-primary m-0 fw-bold">Results for {{ search }}:<strong></strong></p>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+            {% if users %}
+            <table class="table my-0" id="dataTable">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Username</th>
+                        <th>ID Created</th>
+                        <th>Unfollow/Follow</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    {% if user.id!=current_user.id %}
+                    <tr>
+                        <td><a href="/home/other_profile/{{user.username}}"<img class="rounded-circle me-2" width="30" height="30"
+                                src="/profile/get_image/{{user.id}}">{{user.name}}</a></td>
+                        <td>{{user.username}}</td>
+                        <td>{{user.created_date}}</td>
+                        <td>
+                          <div class="d-flex justify-content-between">
+                          {% if current_user.is_following(user) %}
+                          <form method="POST" action="/unfollow/{{user.id}}">
+                            <button type="submit" class="btn btn-primary">Unfollow</button>
+                          </form>
+                          {% else %}
+                          <form method="POST" action="/follow/{{user.id}}">
+                            <button type="submit" class="btn btn-primary">Follow</button>
+                          </form>
+                         {% endif %}
+                        </td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <div style=" text-align:center">
+                <h4> User Not found </h4>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+</div>
+
+    
+            
+{% endblock %}
+

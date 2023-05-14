@@ -1,0 +1,1 @@
+9999999999{"name": "arrow", "version": "1.2.3", "summary": "Better dates & times for Python", "platform": null, "requires_dist": ["python-dateutil (>=2.7.0)", "typing-extensions ; python_version < \"3.8\""], "requires_python": ">=3.6", "files": [], "_cache_version": "1.0.0"}

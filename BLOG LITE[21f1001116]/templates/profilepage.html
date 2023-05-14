@@ -1,0 +1,79 @@
+{% extends 'dashbase.html' %}
+  {% block title %}My Profile{% endblock %}
+
+{% block content %}
+<div class="container text-center">
+  <div class="row ">
+    <div class="col">
+      <div class="card bg-dark" style="width: 15rem">
+        <h5 class="card-header"><img src="/profile/get_image/{{current_user.id}}" class="rounded-circle me-2" width="200" height="200"
+            alt="profile_pic"><br><font color="white">{{current_user.username }}</font></br>
+        </h5>
+        <div class="card-body">
+          <h5 class="card-title"><font color="white">{{current_user.name }}</font></h5>
+          <div class="d-flex justify-content-between">
+            {% if user.id != current_user.id %}
+            {% if current_user.is_following(user) %}
+                <form method="POST" action="/unfollow/{{current_user.id}}">
+                    <button type="submit" class="btn btn-primary">Unfollow</button>
+                </form>
+            {% else %}
+                <form method="POST" action="/follow/{{current_user.id}}">
+                    <button type="submit" class="btn btn-primary">Follow</button>
+                </form>
+            {% endif %}
+            {% endif %}
+
+            <button class="btn btn-secondary dropdown-toggle " type="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+     
+            </button>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><a class="dropdown-item active " href="/profile/update/{{current_user.id}}" >Edit Profile</a></li>
+              <li><a class="dropdown-item" href="/profile/delete/{{current_user.id}}">Delete Profile</a></li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card bg-dark" style="width: 8rem; border:none">
+        <div class="card-body">
+            <h5 class="card-title"><strong><font color="white">Post</font></strong></h5>
+            <p class="card-text"><h4><font color="white">{{current_user.post|length}}</font></h4></p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card bg-dark" style="width:8rem; border:none">
+        <div class="card-body">
+            <h5 class="card-title"><strong><font color="white">Follower</font></strong></h5>
+            <p class="card-text"><h4><font color="white">{{follower|length}}</font></h4></p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card bg-dark" style="width: 8rem; border:none">
+        <div class="card-body">
+            <h5 class="card-title"><strong><font color="white">Following</font></strong></h5>
+            <p class="card-text"><h4><font color="white">{{following|length}}</font></h4></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<span class="d-block p-1 text-bg-dark"></span>
+<br>
+
+
+
+
+{% for post in posts|reverse %}
+
+    {% include 'display_post.html' %}
+
+{% endfor %}
+          
+
+{% endblock %}

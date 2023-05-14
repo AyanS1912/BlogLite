@@ -1,0 +1,1 @@
+9999999999{"name": "jinja2-time", "version": "0.2.0", "summary": "Jinja2 Extension for Dates and Times", "platform": "UNKNOWN", "requires_dist": ["jinja2", "arrow"], "requires_python": null, "files": [], "_cache_version": "1.0.0"}

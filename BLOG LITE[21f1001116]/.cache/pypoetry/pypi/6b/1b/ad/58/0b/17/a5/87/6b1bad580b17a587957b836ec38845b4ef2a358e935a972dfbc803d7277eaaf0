@@ -1,0 +1,1 @@
+9999999999{"name": "Flask-Mail", "version": "0.9.1", "summary": "Flask extension for sending email", "platform": "any", "requires_dist": ["Flask", "blinker"], "requires_python": null, "files": [], "_cache_version": "1.0.0"}

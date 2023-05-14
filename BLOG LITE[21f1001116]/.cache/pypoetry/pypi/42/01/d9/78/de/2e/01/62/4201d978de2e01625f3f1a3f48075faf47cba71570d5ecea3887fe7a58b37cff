@@ -1,0 +1,1 @@
+9999999999{"name": "Flask-BabelEx", "version": "0.9.4", "summary": "Adds i18n/l10n support to Flask applications", "platform": "any", "requires_dist": ["Flask", "Babel (>=1.0)", "speaklater (>=1.2)", "Jinja2 (>=2.5)"], "requires_python": "", "files": [], "_cache_version": "1.0.0"}

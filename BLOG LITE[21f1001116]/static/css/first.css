@@ -1,0 +1,59 @@
+* {
+    box-sizing: border-box;
+}
+.topbar {
+  height: 5rem;
+}
+
+#myprofile {
+  background:#30303b;
+   
+}
+
+#search_for{
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+
+}
+.shadow {
+  box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15) !important;
+}
+
+
+  
+  
+}
+}
+input {
+    margin: 8px 0px;
+}
+
+body {
+    background:linear-gradient(220.55deg, #333399 0%, #ff00cc 100%) !important;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+.container {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 50%;
+    align-items: center;
+    margin: auto;
+    padding: 20px;
+    margin-top:5%
+
+}
+
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    background-color: black;
+}
